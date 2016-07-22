@@ -1,5 +1,5 @@
 PrjDir	= $(shell pwd)
-BldDir	= .build
+BldDir	= $(PrjDir)/.build
 DistDir = $(BldDir)/dist
 SrcDir	= $(BldDir)/src
 Status	= $(BldDir)/status
@@ -15,7 +15,7 @@ $(Status)/done: $(Status)/dist
 
 $(Status)/dist: $(Status)/patch
 	mkdir -p $(DistDir)
-	DSTROOT=$(DistDir) make -C $(SrcDir)/$(Archive) all_internal apidoc installsub
+	DSTROOT=$(DistDir) make -C $(SrcDir)/$(Archive) all_internal installsub
 	touch $(Status)/dist
 
 $(Status)/patch: $(Status)/clone
