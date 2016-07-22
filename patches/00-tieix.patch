@@ -1,0 +1,66 @@
+diff -Naur headerdoc-8.9.17/Modules/HeaderDoc/APIOwner.pm headerdoc-8.9.17.new/Modules/HeaderDoc/APIOwner.pm
+--- headerdoc-8.9.17/Modules/HeaderDoc/APIOwner.pm	2014-04-04 15:42:17.000000000 -0700
++++ headerdoc-8.9.17.new/Modules/HeaderDoc/APIOwner.pm	2015-01-06 09:10:24.000000000 -0800
+@@ -220,6 +220,8 @@
+ use Cwd;
+ use Carp qw(cluck);
+ 
++use Tie::IxHash;
++
+ use strict;
+ use vars qw(@ISA);
+ 
+@@ -470,7 +472,7 @@
+     $self->{HEADEROBJECT} = 0;
+     # $self->{ENCODING} = undef;
+     $self->{CLASS} = "HeaderDoc::APIOwner";
+-    my %groups = ();
++    tie my %groups, "Tie::IxHash";
+     $self->{GROUPS} = \%groups;
+ } 
+ 
+@@ -7172,7 +7174,7 @@
+ 	if ($object =~ /HeaderDoc::HeaderElement/) { return; }
+ 	print STDERR "Removed object $object from group $groupname\n" if ($localDebug);
+ 
+-	my %groups = %{$self->{GROUPS}};
++	tie my %groups, "Tie::IxHash", %{$self->{GROUPS}};
+ 
+ 	my $group = $groups{$groupname};
+ 
+@@ -7237,7 +7239,7 @@
+ 	if ($object =~ /HeaderDoc::HeaderElement/) { return; }
+ 	print STDERR "Added object $object to group $groupname\n" if ($localDebug);
+ 
+-	my %groups = %{$self->{GROUPS}};
++	tie my %groups, "Tie::IxHash", %{$self->{GROUPS}};
+ 
+ 	my $group = $groups{$groupname};
+ 
+@@ -7285,7 +7287,7 @@
+ 	my $self = shift;
+ 	my $group = shift;
+ 
+-	my %groups = %{$self->{GROUPS}};
++	tie my %groups, "Tie::IxHash", %{$self->{GROUPS}};
+ 
+ 	my $groupname = $group->name();
+ 
+@@ -7313,7 +7315,7 @@
+ 	my $self = shift;
+ 	my $groupname = shift;
+ 
+-	my %groups = %{$self->{GROUPS}};
++	tie my %groups, "Tie::IxHash", %{$self->{GROUPS}};
+ 
+ 	return $groups{$groupname};
+ }
+@@ -7331,7 +7333,7 @@
+ 	my $self = shift;
+ 	my $title = shift;
+ 	my $string = "";
+-	my %groups = %{$self->{GROUPS}};
++	tie my %groups, "Tie::IxHash", %{$self->{GROUPS}};
+ 
+ 	my $xml = 0;
+ 	if (!$title) {

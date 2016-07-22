@@ -1,0 +1,12 @@
+diff -Naur headerdoc-8.9.17/Modules/HeaderDoc/Utilities.pm headerdoc-8.9.17.new/Modules/HeaderDoc/Utilities.pm
+--- headerdoc-8.9.17/Modules/HeaderDoc/Utilities.pm	2015-01-09 16:38:32.000000000 -0800
++++ headerdoc-8.9.17.new/Modules/HeaderDoc/Utilities.pm	2015-01-09 16:39:17.000000000 -0800
+@@ -1966,7 +1966,7 @@
+     # And why doesn't xmllint work correctly with self-closing HTML
+     # tags?
+     my @selfClosingTags = ( "br", "hr", "link", "area", "base",
+-	"basefont", "input", "img", "meta");
++	"basefont", "input", "meta");
+ 
+     for my $tag (@selfClosingTags) {
+ 	$xhtml =~ s/<\Q$tag\E>/<$tag \/>/sg;
