@@ -1,12 +1,12 @@
 diff -Naur headerdoc-8.9.17/xmlman/Makefile headerdoc-8.9.17.new/xmlman/Makefile
 --- headerdoc-8.9.17/xmlman/Makefile	2014-04-04 15:42:17.000000000 -0700
-+++ headerdoc-8.9.17.new/xmlman/Makefile	2016-07-21 23:11:47.049923500 -0700
++++ headerdoc-8.9.17.new/xmlman/Makefile	2016-07-23 00:53:10.069655999 -0700
 @@ -24,10 +24,11 @@
  		DARWIN_CFLAGS= -DUSE_STRCOMPAT -D_GNU_SOURCE
  		DARWIN_LDFLAGS=-lpthread
  		# @echo "If you get duplicate symbol errors, remove -lstringcompat from DARWIN_LDFLAGS."
 -		COMPATIBILITY_BITS=strcompat.o
-+		COMPATIBILITY_BITS=strcompat.o -lxml2
++		COMPATIBILITY_BITS=strcompat.o -lxml2 -lpthread
  	else
  		DARWIN_CFLAGS=
  		DARWIN_LDFLAGS=-lpthread
