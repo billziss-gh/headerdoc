@@ -1,6 +1,15 @@
 diff -Naur headerdoc-8.9.17/xmlman/Makefile headerdoc-8.9.17.new/xmlman/Makefile
 --- headerdoc-8.9.17/xmlman/Makefile	2014-04-04 15:42:17.000000000 -0700
-+++ headerdoc-8.9.17.new/xmlman/Makefile	2016-07-23 00:53:10.069655999 -0700
++++ headerdoc-8.9.17.new/xmlman/Makefile	2020-03-21 16:45:34.000000000 -0700
+@@ -16,7 +16,7 @@
+ 	VSTR=-mmacosx-version-min=${VERS}
+ endif
+ ifeq (${ARCH},Darwin)
+-	DARWIN_CFLAGS=${VSTR}
++	DARWIN_CFLAGS=${VSTR} -I$(shell xcodebuild -sdk macosx -version | awk '/^Path:/{print $$2}')/usr/include/libxml2
+ 	# For older versions of Mac OS X compilers, remove -pie.
+ 	DARWIN_LDFLAGS=-force_flat_namespace ${VSTR} -pie -Wl,-pie
+ else
 @@ -24,10 +24,11 @@
  		DARWIN_CFLAGS= -DUSE_STRCOMPAT -D_GNU_SOURCE
  		DARWIN_LDFLAGS=-lpthread
